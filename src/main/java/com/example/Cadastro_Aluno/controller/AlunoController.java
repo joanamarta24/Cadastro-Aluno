@@ -1,8 +1,8 @@
 package com.example.Cadastro_Aluno.controller;
 
-import com.example.Cadastro_Aluno.CadatrarAluno;
+import com.example.Cadastro_Aluno.Aluno;
 import org.springframework.web.bind.annotation.*;
-import service.CadastroAlunoService;
+import domain.entity.service.CadastroAlunoService;
 
 import java.util.List;
 
@@ -14,20 +14,20 @@ public class AlunoController {
 
     }
     @GetMapping
-    public List<CadatrarAluno> listar(){
+    public List<Aluno> listar(){
         return alunoService.listarTodos();
     }
     @GetMapping("/{id}")
-    public CadatrarAluno buscar(@PathVariable Long id){
+    public Aluno buscar(@PathVariable Long id){
         return  alunoService.buscarPorId(id);
     }
     @PostMapping
-    public CadatrarAluno cadastrar(@RequestBody CadatrarAluno cadatrarAluno){
-        return alunoService.salvar(cadatrarAluno);
+    public Aluno cadastrar(@RequestBody Aluno aluno){
+        return alunoService.salvar(aluno);
     }
     @PutMapping
-    public CadatrarAluno atualizar(@PathVariable Long id, @RequestBody CadatrarAluno novoAluno){
-        CadatrarAluno alunoExistente = alunoService.buscarPorId(id);
+    public Aluno atualizar(@PathVariable Long id, @RequestBody Aluno novoAluno){
+        Aluno alunoExistente = alunoService.buscarPorId(id);
         if(alunoExistente != null){
             alunoExistente.setNome(novoAluno.getNome());
             alunoExistente.setIdade(novoAluno.getIdade());

@@ -1,24 +1,29 @@
-package com.example.Cadastro_Aluno;
-
-import com.example.Cadastro_Aluno.dto.cadastroAlunodto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 
-@SpringBootTest
-@AutoConfigurationMockMvc
-public class AlunontegrationTest {
- @Autowired
- private MockMvc mockMvc;
+import static java.io.IO.print;
+import static org.springframework.http.RequestEntity.post;
+import static org.springframework.web.servlet.function.ServerResponse.status;
 
- @Autowired
+class AlunoIntegrationTest{
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
     private ObjectMapper objectMapper;
+    @Test
+    void deveCadastrarAlunoValido() throws Exception{
+        var dto = new CadastroAlunodto( null, "Jakson Santos",20, "Analise Desenvolvimento");
 
- @Test
-    void deveCadastraroAlunovalido() throws  Exception{
-     var dto = new cadastroAlunodto(
-             null,
-             "Cadastro de Aluno no curso tecnico de mectronica",
+        mockMvc.perform(post("/cadastrosAluno"))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto))
+                .andDo(print());
+        .andExpect(status().isOk())
+                .andExpect(jsonPanth("$.nome").value("João Silva"));
 
-     )
- }
+    }
+    @Test
+    voi
 }
