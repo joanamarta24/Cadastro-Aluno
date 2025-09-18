@@ -1,12 +1,15 @@
+package com.example.Cadastro_Aluno;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
 import static java.io.IO.print;
 import static org.springframework.http.RequestEntity.post;
 import static org.springframework.web.servlet.function.ServerResponse.status;
 
-class AlunoIntegrationTest{
+class CadastraAlunoIntegrationTest{
     @Autowired
     private MockMvc mockMvc;
 
@@ -25,5 +28,8 @@ class AlunoIntegrationTest{
 
     }
     @Test
-    voi
+    void deveRetornarErroSeIdadeForInvalida() throws Exception{
+        var dto = new C
+
+    }
 }

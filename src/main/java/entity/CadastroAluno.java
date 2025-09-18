@@ -63,14 +63,5 @@ public class CadastroAluno {
         this.idade = idade;
     }
 
-    @Override
-    public String toString() {
-        return "Aluno{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", matricula='" + matricula + '\'' +
-                ", curso='" + curso + '\'' +
-                ", idade=" + idade +
-                '}';
-    }
+
 }

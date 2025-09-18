@@ -1,12 +1,12 @@
 package domain.entity.service;
 
-import com.example.Cadastro_Aluno.CadatrarAluno;
-import domain.entity.repository.AlunoRepository;
+
+import domain.entity.repository.CadastraAlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CadastroAlunoService {
-   private final AlunoRepository;
-    public CadastroAlunoService(AlunoRepository){
+   private final CadastraAlunoRepository;
+    public CadastroAlunoService(CadastraAlunoRepository){
         @Autowired
 
 
