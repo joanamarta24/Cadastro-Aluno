@@ -1,6 +1,7 @@
 package com.example.Cadastro_Aluno;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,7 +29,7 @@ class CadastraAlunoIntegrationTest{
 
     }
     @Test
-    void deveRetornarErroSeIdadeForInvalida() throws Exception{
+   public void deveRetornarErroSeIdadeForInvalida() throws Exception{
         var dto = new C
 
     }
