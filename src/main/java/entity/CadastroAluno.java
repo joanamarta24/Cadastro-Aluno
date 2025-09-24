@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,8 @@ public class CadastroAluno {
     private String matricula;
     private String curso;
     private int idade;
+
+
 
     public Long getId() {
         return id;
@@ -62,6 +65,7 @@ public class CadastroAluno {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
 
 
 }

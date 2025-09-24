@@ -1,31 +1,14 @@
 package com.example.Cadastro_Aluno.dto;
 
-public class cadastroAlunodto {
-    private String nome;
-    private Integer idade;
-    private String curso;
 
-    public String getNome() {
-        return nome;
-    }
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+public record cadastroAlunodto(
+ @Schema(description = "ID do aluno",example = "5") Long id,
 
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
-    public String getCurso() {
-        return curso;
-    }
-
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
-}
+ @NotBlank(message = "Nome é obrigatório")
+ @Size(min =  3, max = 120, message = )
+)
+{}
