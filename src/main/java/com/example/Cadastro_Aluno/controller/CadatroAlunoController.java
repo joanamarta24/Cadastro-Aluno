@@ -1,29 +1,39 @@
 package com.example.Cadastro_Aluno.controller;
 
+import com.example.Cadastro_Aluno.dto.CadastroAlunoDTO;
 import domain.entity.repository.CadastraAlunoRepository;
 import entity.CadastroAluno;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import domain.entity.service.CadastroAlunoService;
+import domain.entity.service.AlunoService;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.data.repository.util.ReactiveWrapperConverters.map;
-
+@RestController
+@RequestMapping
 public class CadatroAlunoController {
-    private final CadastroAlunoService alunoService;
+    private final AlunoService alunoService;
 
     public CadatroAlunoController
-            (CadastroAlunoService cadastroAlunoService, CadastroAlunoService alunoService){
+            (AlunoService cadastroAlunoService, AlunoService alunoService){
         this.alunoService = alunoService;
-        CadastroAlunoService alunoService1 = this.alunoService;
+        AlunoService alunoService1 = this.alunoService;
 
     }
     @GetMapping
-    public List<CadastroAluno> listar(){
-        return alunoService.listarTodos();
+    public ResponseEntity<List<CadastroAluno>listar>{
+        List<CadastroAluno> alunos = alunoService.listarTodos();
+        if(alunos.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(alunos);
     }
+
+
     @GetMapping("/{id}")
     public CadastroAluno buscar(@PathVariable Long id){
         return  alunoService.buscarPorId(id);
@@ -41,9 +51,11 @@ public class CadatroAlunoController {
                 ));
     }
     @PostMapping
-    public CadastroAluno cadastrar(@RequestBody Aluno aluno){
-        return alunoService.salvar(aluno);
+    public ResponseEntity<CadastroAlunoDTO> cadastrar(@Valid @RequestBody CadastroAlunoDTO dto) {
+        CadastroAlunoDTO salvo = alunoService.cadastrar(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
+
     @PutMapping
     public CadastroAluno atualizar(@PathVariable Long id, @RequestBody Aluno novoAluno){
         CadastroAluno alunoExistente = alunoService.buscarPorId(id);
