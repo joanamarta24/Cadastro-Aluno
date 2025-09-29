@@ -100,25 +100,38 @@ public class CadastroAlunoController {
                     return ResponseEntity.notFound().build();
                 });
     }
-
     @PostMapping
     @Operation(summary = "Cadastrar novo aluno", description = "Cria um novo registro de aluno")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Aluno cadastrado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos")
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
+            @ApiResponse(responseCode = "409", description = "Conflito - matrícula já existe"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<CadastroAlunoResponseDTO> cadastrar(
             @Valid @RequestBody CadastroAlunoDTO dto) {
 
-        log.info("Recebida requisição para cadastrar novo aluno: {}", dto.getNome());
+        log.info("Recebida requisição para cadastrar novo aluno: {}", dto.nome());
 
         try {
             CadastroAlunoResponseDTO alunoSalvo = alunoService.cadastrar(dto);
-            log.info("Aluno cadastrado com sucesso: {} - ID: {}", alunoSalvo.getNome(), alunoSalvo.getId());
+            log.info("Aluno cadastrado com sucesso: {} - ID: {}", alunoSalvo.nome(), alunoSalvo.id());
             return ResponseEntity.status(HttpStatus.CREATED).body(alunoSalvo);
+
+        } catch (DataIntegrityViolationException e) {
+            log.warn("Tentativa de cadastrar aluno com matrícula duplicada: {}", dto.matricula());
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(null); // Ou retorne um DTO de erro
+
+        } catch (IllegalArgumentException e) {
+            log.warn("Dados inválidos fornecidos: {}", e.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(null); // Ou retorne um DTO de erro
+
         } catch (Exception e) {
-            log.error("Erro ao cadastrar aluno: {}", e.getMessage(), e);
-            throw e; // Deixe o ExceptionHandler tratar
+            log.error("Erro interno ao cadastrar aluno: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null); // Ou retorne um DTO de erro
         }
     }
 
