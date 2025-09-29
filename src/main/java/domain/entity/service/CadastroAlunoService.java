@@ -58,4 +58,8 @@ public class CadastroAlunoService {
     public Page<CadastroAlunoResponseDTO> listarTodos(Pageable pageable) {
         return null;
     }
+
+    public Optional<Object> buscarPorMatricula(String matricula) {
+        return null;
+    }
 }

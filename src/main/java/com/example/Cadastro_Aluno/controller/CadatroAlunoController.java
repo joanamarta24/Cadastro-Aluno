@@ -1,9 +1,7 @@
 package com.example.Cadastro_Aluno.controller;
 
-import com.example.Cadastro_Aluno.dto.CadastroAlunoDTO;
+
 import com.example.Cadastro_Aluno.dto.CadastroAlunoResponseDTO;
-import com.example.Cadastro_Aluno.entity.CadastroAluno;
-import com.example.Cadastro_Aluno.service.AlunoService;
 import domain.entity.service.CadastroAlunoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -89,7 +87,7 @@ public class CadastroAlunoController {
 
     @GetMapping("/matricula/{matricula}")
     @Operation(summary = "Buscar aluno por matrícula", description = "Retorna os detalhes de um aluno pela matrícula")
-    public ResponseEntity<CadastroAlunoResponseDTO> buscarPorMatricula(
+    public ResponseEntity<Object> buscarPorMatricula(
             @Parameter(description = "Número da matrícula", example = "2023001")
             @PathVariable String matricula) {
 

@@ -51,6 +51,7 @@ public  class CadastroAluno {
         private String matricula;
         private String curso;
         private Integer idade;
+
     }
     public CadastroAluno id(Long id){
         this.id = id;

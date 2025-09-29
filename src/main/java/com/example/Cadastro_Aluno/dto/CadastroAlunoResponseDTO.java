@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "DTO de resposta para cadastro de aluno")
-public record CadastroAlunoResponseDTO{
+public record CadastroAlunoResponseDTO() {
         @Schema(description = "Id do aluno," example $anchor = "1")
         private static Long id;
 
