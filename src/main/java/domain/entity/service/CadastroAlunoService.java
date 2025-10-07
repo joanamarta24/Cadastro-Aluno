@@ -56,10 +56,31 @@ public class CadastroAlunoService {
     }
 
     public Page<CadastroAlunoResponseDTO> listarTodos(Pageable pageable) {
-        return null;
+       Page<CadastroAluno> alunos = CadastraAlunoRepository.findAll(pageable);
+
+       return alunos.map(alunos -> new CadastroAlunoResponseDTO(
+               alunos.getId(),
+               alunos.getNome(),
+               alunos.getMatricula(),
+               alunos.getCurso(),
+               alunos.getIdade()
+       ));
     }
 
     public Optional<Object> buscarPorMatricula(String matricula) {
         return null;
     }
+
+    public Optional<Object> buscarPorId(Long id) {
+        return null;
+    }
+
+    @Override
+    public boolean deletar(Long id) {
+        return alunoRepository.findById(id)
+                .map(aluno -> {
+                    alunoRepository.delete(aluno);
+                    return true;
+                })
+                .orElse(false);
 }
